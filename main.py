@@ -1,5 +1,5 @@
 # coding: utf-8
-import urllib2
+import requests
 import json
 import math
 from datetime import datetime,  timedelta
@@ -10,8 +10,8 @@ def get_events(period):
     fin = start + timedelta(days=period)
     print fin
     range_param = "&start={start}&finish={fin}".format(start=start.strftime('%s'), fin=fin.strftime('%s') )
-    response = urllib2.urlopen(baseurl + range_param)
-    res = json.loads(response.read())
+    response = requests.get(baseurl + range_param)
+    res = json.loads(response.text)
     return res
 
 def away_from(start):

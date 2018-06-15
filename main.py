@@ -41,6 +41,7 @@ def send2slack(text, url=None):
     res = requests.post(url, data=json.dumps(payload), headers={'Content-Type': 'application/json', 'charset':'utf-8'})
     print(res.content)
 
-upcomings =  get_events(7) #1週間分取得
-message = create_message(upcomings)
-send2slack(message)
+if __name__ == '__main__':
+    upcomings =  get_events(7) #1週間分取得
+    message = create_message(upcomings)
+    send2slack(message)

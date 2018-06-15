@@ -5,13 +5,22 @@ import json
 import math
 from datetime import datetime,  timedelta
 
+
+#class Event():
+#    def __init__(self, info):
+#        self.
+#    def recent:
+#    def away:
+#
+
 def get_events(period):
     baseurl = "https://ctftime.org/api/v1/events/?limit=100"
     start = datetime.now()
     fin = start + timedelta(days=period)
-    print fin
     range_param = "&start={start}&finish={fin}".format(start=start.strftime('%s'), fin=fin.strftime('%s') )
-    response = requests.get(baseurl + range_param)
+    req_url = baseurl + range_param
+    headers = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML,  like Gecko) Chrome/66.0.3359.117 Safari/537.36'}
+    response = requests.get(req_url, headers=headers)
     res = json.loads(response.text)
     return res
 
@@ -38,7 +47,7 @@ def send2slack(text):
     url = os.getenv('SLACK_WEBHOOK_URL')#環境変数にWebhookのURLを入れておく
     payload = {'text': text, 'username': "ctftime-bot", "icon_emoji": ":robot_face:"}
     res = requests.post(url, data=json.dumps(payload), headers={'Content-Type': 'application/json', 'charset':'utf-8'})
-    print res.content
+    print(res.content)
 
 infos =  get_events(7) #1週間分取得
 message = create_message(infos)

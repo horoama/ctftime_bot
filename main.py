@@ -5,14 +5,6 @@ import json
 import math
 from datetime import datetime,  timedelta
 
-
-#class Event():
-#    def __init__(self, info):
-#        self.
-#    def recent:
-#    def away:
-#
-
 def get_events(period):
     baseurl = "https://ctftime.org/api/v1/events/?limit=100"
     start = datetime.now()
